@@ -5,5 +5,10 @@ build
 dist
 .DS_Store
 *.log
+*.tsbuildinfo
+.turbo
+.vercel
+coverage
 .env.local
 .env.*.local
+
