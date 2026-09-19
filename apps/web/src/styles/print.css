@@ -1,0 +1,35 @@
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  body::before {
+    display: none !important;
+  }
+
+  nav,
+  header,
+  footer,
+  .no-print,
+  [data-print-hide="true"] {
+    display: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    font-family: monospace;
+  }
+
+  .sheet-container {
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    break-inside: avoid;
+  }
+}

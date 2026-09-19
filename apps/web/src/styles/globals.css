@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #fef9ec;
+  --desk: #f2eee1;
+  --rule: #e7e2d5;
+  --ink: #09150e;
+  --ink-2: #1e2a22;
+  --ink-soft: #3d463f;
+  --ink-muted: #5c6259;
+  --on-ink: #fef9ec;
+  --seal: #a7382e;
+  --sticky-yellow: #f5ecb4;
+  --sticky-green: #dde8cd;
+  --sticky-rose: #ebd9d0;
+  --focus: var(--ink);
+  --shadow-sheet: 0 1px 0 rgb(0 0 0 / 0.06), 0 8px 16px -10px rgb(0 0 0 / 0.35);
+  --shadow-sticky: 0 6px 12px -8px rgb(0 0 0 / 0.35);
+  --radius: 2px;
+}
+
+/* Reduced decoration overrides */
+html[data-decor="off"] {
+  --shadow-sheet: none;
+  --shadow-sticky: none;
+}
+
+html[data-decor="off"] * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transform: none !important;
+  transition-duration: 0.001ms !important;
+  animation-duration: 0.001ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Base resets & typography */
+html {
+  background-color: var(--desk);
+  color: var(--ink-soft);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Single paper grain pseudo-element (< 2KB SVG noise) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+html[data-decor="off"] body::before {
+  display: none;
+}
+
+/* Universal accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Mono meta labels */
+.font-mono-label {
+  font-family: var(--font-mono), Courier, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Truncation utility */
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

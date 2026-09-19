@@ -1,0 +1,86 @@
+import { Dictionary } from './types';
+
+export const uz: Dictionary = {
+  locale: 'uz',
+  brand: {
+    name: 'KEPIO',
+    tagline: 'Foydali narsani topding. Endi yoʻqotma.',
+    subtagline: 'Shaxsiy bilimlar va qaydlar daftari.',
+  },
+  a11y: {
+    skipLink: 'Asosiy kontentga oʻtish',
+    mainNavigation: 'Asosiy navigatsiya',
+    languageSelector: 'Tilni tanlash',
+    userProfile: 'Foydalanuvchi profili',
+    reducedDecorToggle: 'Soddalashtirilgan rejimni yoqish yoki oʻchirish',
+  },
+  nav: {
+    library: 'Kutubxona',
+    daily: 'Kun tartibi',
+    archive: 'Arxiv',
+    settings: 'Sozlamalar',
+    signIn: 'Kirish',
+  },
+  stamps: {
+    header: 'SHAXSIY BILIMLAR',
+    new: 'YANGI',
+    read: 'OʻQILDI',
+    done: 'BAJARILDI',
+    archived: 'ARXIVLANDI',
+  },
+  collections: {
+    all: 'Barchasi',
+    jobs: 'Ish',
+    freelance: 'Freelance',
+    courses: 'Kurslar',
+    housing: 'Uy-joy',
+    tools: 'Asboblar',
+    newCollectionDisabled: '+ Yangi toifa',
+  },
+  landing: {
+    eyebrow: 'KEPIO / KEE-pee-oh · keep it',
+    h1Part1: 'Foydali narsani topding. ',
+    h1Accent: 'Endi yoʻqotma.',
+    subtitle: 'Telegram va internetdagi eng muhim topilmalarni bitta toza qogʻoz daftarida saqla, tartibla va amalda qoʻlla.',
+    primaryCta: 'Saqlashni boshlash →',
+    secondaryLink: 'Qanday ishlaydi',
+    stepsTitle: 'Top → Saqla → Bajar',
+    steps: {
+      find: {
+        title: '01 · Top',
+        desc: 'Kanal, xabar yoki maqoladagi foydali fikr, vakansiya yoki vositani ushlab qol.',
+      },
+      keep: {
+        title: '02 · Saqla',
+        desc: 'Tartibli toifalar va teglar bilan qogʻoz varagʻiga qayd et. Chalgʻituvchi shovqinlarsiz.',
+      },
+      act: {
+        title: '03 · Bajar',
+        desc: 'Har bir saqlangan narsa oʻz vaqtida natijaga aylansin. Belgila, oʻqi va yakunla.',
+      },
+    },
+    quote: '“Eslab qolishni bizga qoldir. Sening ishing — bajarish.”',
+    microClaims: 'Oʻzbekcha va inglizcha · Reklamasiz · Tezkor',
+    finalCtaTitle: 'Foydali bilimlarni qogʻozga muhrlang.',
+    finalCtaSubtitle: 'Hech qanday reklamalarsiz, toza va xotirjam mutolaa muhiti.',
+    telegramBot: 'Telegram Bot (Tez orada)',
+    chromeExtension: 'Chrome Kengaytmasi (Tez orada)',
+  },
+  common: {
+    save: 'Saqlash →',
+    cancel: 'Bekor qilish',
+    comingSoon: 'Tez orada',
+    searchPlaceholder: 'Qidirish...',
+    searchShortcutHint: 'Ctrl+K',
+    page: 'Varaq',
+    of: '/',
+    total: 'jami',
+  },
+  footer: {
+    description: 'Qogʻoz estetikasi va diqqatni jamlash uchun yaratilgan shaxsiy daftar.',
+    specsLink: 'Dizayn tizimi (Specs)',
+    decorToggleActive: 'Bezaklar: Oʻchiq (Tekis)',
+    decorToggleDefault: 'Bezaklar: Qogʻoz rejimi',
+    rights: 'Barcha huquqlar himoyalangan.',
+  },
+};

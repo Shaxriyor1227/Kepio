@@ -1,0 +1,86 @@
+import { Dictionary } from './types';
+
+export const en: Dictionary = {
+  locale: 'en',
+  brand: {
+    name: 'KEPIO',
+    tagline: 'You found something useful. Now don’t lose it.',
+    subtagline: 'A personal notebook for your saved signals.',
+  },
+  a11y: {
+    skipLink: 'Skip to main content',
+    mainNavigation: 'Main navigation',
+    languageSelector: 'Choose language',
+    userProfile: 'User profile',
+    reducedDecorToggle: 'Toggle reduced decoration mode',
+  },
+  nav: {
+    library: 'Library',
+    daily: 'Daily',
+    archive: 'Archive',
+    settings: 'Settings',
+    signIn: 'Sign in',
+  },
+  stamps: {
+    header: 'PERSONAL NOTES',
+    new: 'NEW',
+    read: 'READ',
+    done: 'DONE',
+    archived: 'ARCHIVED',
+  },
+  collections: {
+    all: 'All',
+    jobs: 'Jobs',
+    freelance: 'Freelance',
+    courses: 'Courses',
+    housing: 'Housing',
+    tools: 'Tools',
+    newCollectionDisabled: '+ New collection',
+  },
+  landing: {
+    eyebrow: 'KEPIO / KEE-pee-oh · keep it',
+    h1Part1: 'You found something useful. ',
+    h1Accent: 'Now don’t lose it.',
+    subtitle: 'Save important findings from Telegram and the web in a clean paper notebook. Organize thoughtfully, act decisively.',
+    primaryCta: 'Start keeping →',
+    secondaryLink: 'How it works',
+    stepsTitle: 'Find → Keep → Act',
+    steps: {
+      find: {
+        title: '01 · Find',
+        desc: 'Catch valuable opportunities, articles, gigs, and tools from your everyday feeds.',
+      },
+      keep: {
+        title: '02 · Keep',
+        desc: 'Organize into crisp paper sheets with tags, timestamps, and focused notes. Zero digital clutter.',
+      },
+      act: {
+        title: '03 · Act',
+        desc: 'Turn captured ideas into real momentum. Review, mark status, and follow through.',
+      },
+    },
+    quote: '“Leave the remembering to us. Your job is to act.”',
+    microClaims: 'Uzbek & English · No ads · Blazing fast',
+    finalCtaTitle: 'Seal your personal knowledge on paper.',
+    finalCtaSubtitle: 'Distraction-free, quiet, and built for focused reading and execution.',
+    telegramBot: 'Telegram Bot (Coming soon)',
+    chromeExtension: 'Chrome Extension (Coming soon)',
+  },
+  common: {
+    save: 'Save →',
+    cancel: 'Cancel',
+    comingSoon: 'Coming soon',
+    searchPlaceholder: 'Search notes...',
+    searchShortcutHint: 'Ctrl+K',
+    page: 'Page',
+    of: '/',
+    total: 'total',
+  },
+  footer: {
+    description: 'A tactile paper notebook crafted for sustained reading and intentional action.',
+    specsLink: 'Design specs',
+    decorToggleActive: 'Decor: Flat mode',
+    decorToggleDefault: 'Decor: Paper mode',
+    rights: 'All rights reserved.',
+  },
+};
