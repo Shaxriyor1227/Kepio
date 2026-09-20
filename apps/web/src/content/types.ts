@@ -11,6 +11,8 @@ export interface Dictionary {
     languageSelector: string;
     userProfile: string;
     reducedDecorToggle: string;
+    errorSummary: string;
+    statusRadioGroup: string;
   };
   nav: {
     library: string;
@@ -18,6 +20,7 @@ export interface Dictionary {
     archive: string;
     settings: string;
     signIn: string;
+    signOut: string;
   };
   stamps: {
     header: string;
@@ -33,7 +36,14 @@ export interface Dictionary {
     courses: string;
     housing: string;
     tools: string;
+    other: string;
     newCollectionDisabled: string;
+  };
+  sort: {
+    label: string;
+    recent: string;
+    oldest: string;
+    title: string;
   };
   landing: {
     eyebrow: string;
@@ -55,6 +65,117 @@ export interface Dictionary {
     telegramBot: string;
     chromeExtension: string;
   };
+  library: {
+    title: string;
+    searchPlaceholder: string;
+    searchShortcutHint: string;
+    fromTheMargin: string;
+    statsTitle: string;
+    statsTotal: string;
+    statsActive: string;
+    statsCompleted: string;
+    emptyTitle: string;
+    emptyDesc: string;
+    emptyReset: string;
+    addSignalCta: string;
+    viewOriginal: string;
+    nextStepTitle: string;
+    deadlineLabel: string;
+    noDeadline: string;
+    statusChangeSuccess: string;
+    backToLibrary: string;
+  };
+  forms: {
+    newSignalTitle: string;
+    newSignalSubtitle: string;
+    urlOrTextLabel: string;
+    urlOrTextPlaceholder: string;
+    titleLabel: string;
+    titlePlaceholder: string;
+    summaryLabel: string;
+    summaryPlaceholder: string;
+    sourceTypeLabel: string;
+    sourceTelegram: string;
+    sourceWeb: string;
+    sourceOther: string;
+    sourceChannelLabel: string;
+    sourceChannelPlaceholder: string;
+    collectionLabel: string;
+    tagsLabel: string;
+    tagsPlaceholder: string;
+    tagsHint: string;
+    noteLabel: string;
+    notePlaceholder: string;
+    deadlineLabel: string;
+    submitButton: string;
+    submitting: string;
+    cancelButton: string;
+    successToast: string;
+    errors: {
+      titleRequired: string;
+      urlInvalid: string;
+      collectionRequired: string;
+    };
+  };
+  daily: {
+    title: string;
+    subtitle: string;
+    stamp: string;
+    quickEntryTitle: string;
+    quickEntryPlaceholder: string;
+    quickEntryButton: string;
+    tableCaption: string;
+    colDate: string;
+    colSource: string;
+    colContent: string;
+    colStatus: string;
+    colActions: string;
+    memoTitle: string;
+    memoContent: string;
+    actionsTitle: string;
+    exportCsv: string;
+    printSheet: string;
+    closeDayButton: string;
+    progressTitle: string;
+    progressSummary: string;
+    emptyDaily: string;
+  };
+  signIn: {
+    title: string;
+    tabSignIn: string;
+    tabSignUp: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    passwordLabel: string;
+    passwordPlaceholder: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    showPassword: string;
+    hidePassword: string;
+    submitSignIn: string;
+    submitSignUp: string;
+    mockHint: string;
+  };
+  archive: {
+    title: string;
+    subtitle: string;
+    emptyTitle: string;
+    emptyDesc: string;
+    restoreButton: string;
+  };
+  settings: {
+    title: string;
+    subtitle: string;
+    appearanceSection: string;
+    reducedDecorLabel: string;
+    reducedDecorDesc: string;
+    languageSection: string;
+    languageDesc: string;
+    dataSection: string;
+    dataDesc: string;
+    resetDemoData: string;
+    resetDone: string;
+  };
   common: {
     save: string;
     cancel: string;
@@ -64,6 +185,9 @@ export interface Dictionary {
     page: string;
     of: string;
     total: string;
+    loading: string;
+    allFilter: string;
+    statusAll: string;
   };
   footer: {
     description: string;

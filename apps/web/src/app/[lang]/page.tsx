@@ -74,7 +74,7 @@ export default async function LandingPage({
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <PaperButton href={`/${lang}/library`} variant="primary" size="lg">
+            <PaperButton href={`/${lang}/sign-in`} variant="primary" size="lg">
               {dict.landing.primaryCta}
             </PaperButton>
             <PaperButton href="#how-it-works" variant="secondary" size="lg">
