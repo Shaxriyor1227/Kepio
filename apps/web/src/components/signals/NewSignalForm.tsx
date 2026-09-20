@@ -12,7 +12,7 @@ import { TagInput } from './TagInput';
 import { Rule } from '@/components/paper/Rule';
 import { api } from '@/lib/api/client';
 import { cn } from '@/lib/cn';
-import { ArrowLeft, AlertCircle } from 'lucide-react';
+import { ArrowLeft, AlertCircle, Sparkles, Loader2 } from 'lucide-react';
 
 interface NewSignalFormProps {
   lang: Locale;
@@ -68,7 +68,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
   const router = useRouter();
   const errorSummaryRef = useRef<HTMLDivElement>(null);
 
-  const [url, setUrl] = useState('');
+  const [urlOrText, setUrlOrText] = useState('');
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [sourceType, setSourceType] = useState<SignalSourceType>('web');
@@ -80,7 +80,47 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isParsing, setIsParsing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // AI Magic Auto-Fill function
+  const handleAiAutoFill = async () => {
+    if (!urlOrText.trim()) return;
+
+    setIsParsing(true);
+    try {
+      const res = await fetch('/api/signals/ai-parse', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: urlOrText,
+          url: urlOrText.startsWith('http') ? urlOrText : undefined,
+        }),
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && json.data) {
+          const d = json.data;
+          setTitle(d.title || title);
+          setSummary(d.summary || summary);
+          if (d.collection) setCollection(d.collection);
+          if (d.sourceType) setSourceType(d.sourceType);
+          if (d.sourceLabel) setSourceLabel(d.sourceLabel);
+          if (d.tags && d.tags.length > 0) setTags(d.tags);
+          if (d.note) setNote(d.note);
+          if (d.deadline) setDeadline(d.deadline);
+
+          setToastMessage(lang === 'uz' ? 'AI matnni muvaffaqiyatli tahlil qildi!' : 'AI parsed content successfully!');
+          setTimeout(() => setToastMessage(null), 3000);
+        }
+      }
+    } catch (e) {
+      console.error('AI parse error:', e);
+    } finally {
+      setIsParsing(false);
+    }
+  };
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -89,9 +129,9 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
       newErrors.title = dict.forms.errors.titleRequired;
     }
 
-    if (url.trim()) {
+    if (urlOrText.trim().startsWith('http')) {
       try {
-        new URL(url.trim());
+        new URL(urlOrText.trim());
       } catch {
         newErrors.url = dict.forms.errors.urlInvalid;
       }
@@ -118,7 +158,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
       const created = await api.create({
         title,
         summary: summary || title,
-        url: url.trim() || undefined,
+        url: urlOrText.trim().startsWith('http') ? urlOrText.trim() : undefined,
         sourceType,
         sourceLabel: sourceLabel.trim() || (sourceType === 'telegram' ? 'Telegram' : 'Web'),
         collection,
@@ -131,7 +171,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
 
       setTimeout(() => {
         router.push(`/${lang}/library/${created.id}`);
-      }, 700);
+      }, 600);
     } catch (err) {
       setErrors({ form: 'Kutilmagan xatolik yuz berdi.' });
     } finally {
@@ -175,7 +215,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
           </p>
         </div>
 
-        {/* Error Summary Box (WCAG 2.2 Accessible Form pattern) */}
+        {/* Error Summary */}
         {Object.keys(errors).length > 0 && (
           <div
             ref={errorSummaryRef}
@@ -197,20 +237,43 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-          {/* URL or Content */}
-          <Field
-            id="signal-url"
-            label={dict.forms.urlOrTextLabel}
-            placeholder={dict.forms.urlOrTextPlaceholder}
-            value={url}
-            onChange={(e) => {
-              setUrl(e.target.value);
-              if (e.target.value.includes('t.me')) {
-                setSourceType('telegram');
-              }
-            }}
-            error={errors.url}
-          />
+          {/* Smart Input & AI Auto-fill Trigger */}
+          <div className="space-y-2 p-4 bg-desk/50 border border-rule rounded-paper">
+            <div className="flex items-center justify-between">
+              <label htmlFor="signal-url" className="font-mono text-xs uppercase tracking-wider text-ink font-bold">
+                {dict.forms.urlOrTextLabel}
+              </label>
+              <button
+                type="button"
+                onClick={handleAiAutoFill}
+                disabled={!urlOrText.trim() || isParsing}
+                className="inline-flex items-center gap-1.5 px-3 py-1 bg-ink text-on-ink font-mono text-[11px] uppercase tracking-wider rounded-paper hover:bg-ink-2 active:translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              >
+                {isParsing ? (
+                  <>
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                    <span>Tahlil qilinmoqda...</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-3 h-3 text-sticky-yellow" />
+                    <span>✨ AI bilan toʻldirish</span>
+                  </>
+                )}
+              </button>
+            </div>
+            <textarea
+              id="signal-url"
+              rows={2}
+              value={urlOrText}
+              onChange={(e) => {
+                setUrlOrText(e.target.value);
+                if (e.target.value.includes('t.me')) setSourceType('telegram');
+              }}
+              placeholder={dict.forms.urlOrTextPlaceholder}
+              className="w-full p-2.5 bg-paper border border-rule rounded-paper font-serif text-sm text-ink placeholder:text-ink-muted/50 focus:border-ink focus:ring-1 focus:ring-ink focus:outline-none transition-colors"
+            />
+          </div>
 
           {/* Title */}
           <Field
