@@ -1,6 +1,6 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { isValidLocale, getDictionary, Locale } from '@/lib/i18n';
+import { isValidLocale, getDictionary } from '@/lib/i18n';
 import { SkipLink } from '@/components/layout/SkipLink';
 import { AppHeader } from '@/components/layout/AppHeader';
 import { Footer } from '@/components/layout/Footer';

@@ -37,7 +37,11 @@ interface TelegramUpdate {
 }
 
 export async function handleTelegramUpdate(update: TelegramUpdate, botToken: string) {
-  const sendMessage = async (chatId: number, text: string, replyMarkup?: any) => {
+  const sendMessage = async (
+    chatId: number,
+    text: string,
+    replyMarkup?: Record<string, unknown>,
+  ) => {
     try {
       await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',

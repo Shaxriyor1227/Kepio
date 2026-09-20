@@ -4,7 +4,6 @@ import React, { useState, useMemo, useEffect, useTransition } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Locale } from '@/lib/i18n';
 import { Signal, SignalStatus } from '@/lib/api/types';
-import { FolderTab } from '@/components/paper/FolderTab';
 import { Sheet } from '@/components/paper/Sheet';
 import { StickyNote } from '@/components/paper/StickyNote';
 import { SignalCard } from '@/components/signals/SignalCard';
@@ -225,12 +224,6 @@ export function LibraryInteractiveView({
   const handleSortChange = (newSort: 'recent' | 'oldest' | 'title') => {
     setSort(newSort);
     syncUrl({ sort: newSort });
-  };
-
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-    syncUrl({ page: newPage });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleResetFilters = () => {

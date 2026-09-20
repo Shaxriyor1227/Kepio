@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Locale } from '@/lib/i18n';
 import { Sheet } from '@/components/paper/Sheet';
-import { PaperButton } from '@/components/paper/PaperButton';
-import { Rule } from '@/components/paper/Rule';
 import { Sparkles, Globe, Database, Check } from 'lucide-react';
 
 interface SettingsViewProps {

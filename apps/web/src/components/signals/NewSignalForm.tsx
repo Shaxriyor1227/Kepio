@@ -172,7 +172,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
       setTimeout(() => {
         router.push(`/${lang}/library/${created.id}`);
       }, 600);
-    } catch (err) {
+    } catch {
       setErrors({ form: 'Kutilmagan xatolik yuz berdi.' });
     } finally {
       setIsSubmitting(false);

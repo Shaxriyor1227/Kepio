@@ -6,7 +6,6 @@ import { Signal } from '@/lib/api/types';
 import { Sheet } from '@/components/paper/Sheet';
 import { Stamp } from '@/components/paper/Stamp';
 import { StickyNote } from '@/components/paper/StickyNote';
-import { PaperButton } from '@/components/paper/PaperButton';
 import { Download, Printer, Plus, CheckCircle2 } from 'lucide-react';
 import { api } from '@/lib/api/client';
 

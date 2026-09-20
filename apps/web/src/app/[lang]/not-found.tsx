@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Sheet } from '@/components/paper/Sheet';
 import { PaperButton } from '@/components/paper/PaperButton';
 import { Stamp } from '@/components/paper/Stamp';

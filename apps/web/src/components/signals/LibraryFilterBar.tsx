@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useTransition, useState, useEffect } from 'react';
+import React, { useCallback, useTransition, useState, useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/cn';
@@ -40,7 +40,7 @@ export function LibraryFilterBar({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const [searchTerm, setSearchTerm] = useState(currentQ);
 
@@ -48,7 +48,7 @@ export function LibraryFilterBar({
     setSearchTerm(currentQ);
   }, [currentQ]);
 
-  const updateFilters = (updates: Record<string, string | null>) => {
+  const updateFilters = useCallback((updates: Record<string, string | null>) => {
     const params = new URLSearchParams(searchParams?.toString() || '');
 
     // Reset page to 1 on filter/search change unless page is explicitly updated
@@ -68,7 +68,7 @@ export function LibraryFilterBar({
       const qs = params.toString();
       router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
     });
-  };
+  }, [pathname, router, searchParams]);
 
   // Debounced search
   useEffect(() => {
@@ -79,7 +79,7 @@ export function LibraryFilterBar({
     }, 250);
 
     return () => clearTimeout(timer);
-  }, [searchTerm]);
+  }, [currentQ, searchTerm, updateFilters]);
 
   const statuses: { key: string; label: string; count: number }[] = [
     { key: 'all', label: dict.allStatus, count: counts.total },
