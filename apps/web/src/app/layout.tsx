@@ -19,7 +19,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var d=localStorage.getItem('kepio-decor');if(d==='off'||window.matchMedia('(prefers-contrast: more)').matches){document.documentElement.setAttribute('data-decor','off')}}catch(e){}})()`,
+            __html: `(function(){try{var p=window.location.pathname;var l=p.match(/^\/(uz|en)(?:\/|$)/);if(l){document.documentElement.lang=l[1]}var d=localStorage.getItem('kepio-decor');if(d==='off'||window.matchMedia('(prefers-contrast: more)').matches){document.documentElement.setAttribute('data-decor','off')}}catch(e){}})()`,
           }}
         />
       </head>

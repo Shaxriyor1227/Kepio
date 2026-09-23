@@ -155,7 +155,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
 
     setIsSubmitting(true);
     try {
-      const created = await api.create({
+      await api.create({
         title,
         summary: summary || title,
         url: urlOrText.trim().startsWith('http') ? urlOrText.trim() : undefined,
@@ -170,7 +170,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
       setToastMessage(dict.forms.successToast);
 
       setTimeout(() => {
-        router.push(`/${lang}/library/${created.id}`);
+        router.push(`/${lang}/library`);
       }, 600);
     } catch {
       setErrors({ form: 'Kutilmagan xatolik yuz berdi.' });

@@ -11,6 +11,7 @@ import { Pagination } from '@/components/paper/Pagination';
 import { PaperButton } from '@/components/paper/PaperButton';
 import { Search, Inbox, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import { getPersistedSignals } from '@/lib/api/client';
 
 interface LibraryInteractiveViewProps {
   initialSignals: Signal[];
@@ -61,6 +62,14 @@ export function LibraryInteractiveView({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
+  const [signals, setSignals] = useState<Signal[]>(initialSignals);
+
+  useEffect(() => {
+    const persisted = getPersistedSignals();
+    if (persisted.length === 0) return;
+    const persistedIds = new Set(persisted.map((signal) => signal.id));
+    setSignals([...persisted, ...initialSignals.filter((signal) => !persistedIds.has(signal.id))]);
+  }, [initialSignals]);
 
   const [collection, setCollection] = useState<string>(
     searchParams?.get('collection') || 'all'
@@ -123,7 +132,7 @@ export function LibraryInteractiveView({
   // Instant calculation of counts across all signals
   const counts = useMemo(() => {
     const byCollection: Record<string, number> = {
-      all: initialSignals.length,
+      all: signals.length,
       jobs: 0,
       freelance: 0,
       courses: 0,
@@ -138,17 +147,17 @@ export function LibraryInteractiveView({
       archived: 0,
     };
 
-    for (const item of initialSignals) {
+    for (const item of signals) {
       if (byCollection[item.collection] !== undefined) byCollection[item.collection]++;
       if (byStatus[item.status] !== undefined) byStatus[item.status]++;
     }
 
-    return { total: initialSignals.length, byCollection, byStatus };
-  }, [initialSignals]);
+    return { total: signals.length, byCollection, byStatus };
+  }, [signals]);
 
   // Instant client-side memoized filtered list (0ms response)
   const filteredSignals = useMemo(() => {
-    let list = [...initialSignals];
+    let list = [...signals];
 
     if (collection && collection !== 'all') {
       list = list.filter((s) => s.collection === collection);
@@ -176,7 +185,7 @@ export function LibraryInteractiveView({
     });
 
     return list;
-  }, [initialSignals, collection, status, query, sort]);
+  }, [signals, collection, status, query, sort]);
 
   const pageSize = 6;
   const totalPages = Math.max(1, Math.ceil(filteredSignals.length / pageSize));
@@ -237,6 +246,10 @@ export function LibraryInteractiveView({
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink">
+        {dict.library.title}
+      </h1>
+
       {/* Top Folder Tabs (0ms Instant Switch) */}
       <div className="flex items-center gap-1 overflow-x-auto scrollbar-none border-b border-rule pt-2">
         {collectionsList.map((col) => {

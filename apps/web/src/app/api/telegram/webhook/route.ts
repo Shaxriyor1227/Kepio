@@ -4,10 +4,20 @@ import { handleTelegramUpdate } from '@/lib/bot/bot';
 export async function POST(req: NextRequest) {
   try {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const webhookSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
+
+    if (webhookSecret && req.headers.get('x-telegram-bot-api-secret-token') !== webhookSecret) {
+      return NextResponse.json({ ok: false, message: 'Unauthorized' }, { status: 401 });
+    }
 
     if (!botToken) {
       console.warn('TELEGRAM_BOT_TOKEN sozlanmagan');
       return NextResponse.json({ ok: false, message: 'Bot token missing' }, { status: 200 });
+    }
+
+    const contentLength = Number(req.headers.get('content-length') || 0);
+    if (contentLength > 128_000) {
+      return NextResponse.json({ ok: false, message: 'Payload too large' }, { status: 413 });
     }
 
     const update = await req.json();

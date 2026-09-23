@@ -12,6 +12,7 @@ import { cn } from '@/lib/cn';
 
 interface SignInViewProps {
   lang: Locale;
+  nextPath?: string;
   dict: {
     signIn: {
       title: string;
@@ -32,7 +33,7 @@ interface SignInViewProps {
   };
 }
 
-export function SignInView({ lang, dict }: SignInViewProps) {
+export function SignInView({ lang, nextPath, dict }: SignInViewProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'signin' | 'signup'>('signin');
   const [showPassword, setShowPassword] = useState(false);
@@ -44,8 +45,10 @@ export function SignInView({ lang, dict }: SignInViewProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    document.cookie = 'kepio_demo_session=active; Path=/; Max-Age=604800; SameSite=Lax';
+    window.localStorage.setItem('kepio_user_email', email.trim());
     setTimeout(() => {
-      router.push(`/${lang}/library`);
+      router.push(nextPath || `/${lang}/library`);
     }, 400);
   };
 

@@ -33,6 +33,7 @@ export default async function AppLayout({
           searchShortcutHint: dict.library.searchShortcutHint,
           langSelector: dict.a11y.languageSelector,
           userProfile: dict.a11y.userProfile,
+          signOut: dict.nav.signOut,
           nav: {
             library: dict.nav.library,
             daily: dict.nav.daily,

@@ -18,6 +18,7 @@ interface AppHeaderProps {
     searchShortcutHint: string;
     langSelector: string;
     userProfile: string;
+    signOut: string;
     nav: {
       library: string;
       daily: string;
@@ -51,6 +52,12 @@ export function AppHeader({ lang, dict }: AppHeaderProps) {
     } else {
       router.push(`/${lang}/library`);
     }
+  };
+
+  const handleSignOut = () => {
+    document.cookie = 'kepio_demo_session=; Path=/; Max-Age=0; SameSite=Lax';
+    router.push(`/${lang}/sign-in`);
+    router.refresh();
   };
 
   const navItems = [
@@ -99,13 +106,16 @@ export function AppHeader({ lang, dict }: AppHeaderProps) {
         {/* Language & User */}
         <div className="flex items-center gap-3">
           <LanguageSwitcher currentLocale={lang} label={dict.langSelector} />
-          <div
-            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-paper border border-rule rounded-paper font-mono text-xs text-ink whitespace-nowrap select-none shadow-sm"
+          <button
+            type="button"
+            onClick={handleSignOut}
+            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-paper border border-rule rounded-paper font-mono text-xs text-ink whitespace-nowrap select-none shadow-sm hover:border-ink transition-colors"
             aria-label={dict.userProfile}
+            title={dict.signOut}
           >
             <span className="w-2 h-2 rounded-full bg-[#1e5436]" aria-hidden="true" />
             <span className="truncate max-w-[120px]">user@kepio.app</span>
-          </div>
+          </button>
         </div>
       </div>
 

@@ -81,7 +81,7 @@ export default async function LandingPage({
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-ink tracking-tight max-w-3xl mx-auto">
               {dict.landing.h1Part1}
-              <em className="italic text-seal font-serif not-italic">{dict.landing.h1Accent}</em>
+              <em className="text-seal font-serif not-italic">{dict.landing.h1Accent}</em>
             </h1>
 
             <p className="text-lg sm:text-xl text-ink-soft max-w-2xl mx-auto leading-relaxed">

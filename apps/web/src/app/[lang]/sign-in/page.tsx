@@ -18,10 +18,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function SignInPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ lang: string }>;
+  searchParams: Promise<{ next?: string }>;
 }) {
   const { lang } = await params;
+  const query = await searchParams;
   if (!isValidLocale(lang)) {
     notFound();
   }
@@ -31,6 +34,7 @@ export default async function SignInPage({
   return (
     <SignInView
       lang={lang as Locale}
+      nextPath={query.next}
       dict={{
         signIn: dict.signIn,
       }}
