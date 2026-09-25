@@ -17,9 +17,10 @@ export default function RootLayout({
   return (
     <html lang="uz" className={`${sourceSerif.variable} ${courierPrime.variable}`}>
       <head>
+        {/* Keep this string backslash-free: inside a template literal "\/" is just "/", which would break the regex. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var p=window.location.pathname;var l=p.match(/^\/(uz|en)(?:\/|$)/);if(l){document.documentElement.lang=l[1]}var d=localStorage.getItem('kepio-decor');if(d==='off'||window.matchMedia('(prefers-contrast: more)').matches){document.documentElement.setAttribute('data-decor','off')}}catch(e){}})()`,
+            __html: `(function(){try{var s=window.location.pathname.split('/');if(s[1]==='uz'||s[1]==='en'){document.documentElement.lang=s[1]}var d=localStorage.getItem('kepio-decor');if(d==='off'||window.matchMedia('(prefers-contrast: more)').matches){document.documentElement.setAttribute('data-decor','off')}}catch(e){}})()`,
           }}
         />
       </head>

@@ -27,6 +27,7 @@ export default async function LibraryPage({
         collections: dict.collections,
         sort: dict.sort,
         common: dict.common,
+        paginationLabel: dict.a11y.pagination,
       }}
     />
   );

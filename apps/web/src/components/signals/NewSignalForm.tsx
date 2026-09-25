@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Locale } from '@/lib/i18n';
@@ -79,7 +79,15 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
   const [deadline, setDeadline] = useState('');
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [failedSubmit, setFailedSubmit] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Focus the summary in an effect: on the first failed submit the summary is not mounted yet.
+  useEffect(() => {
+    if (failedSubmit > 0) {
+      errorSummaryRef.current?.focus();
+    }
+  }, [failedSubmit]);
   const [isParsing, setIsParsing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -149,7 +157,7 @@ export function NewSignalForm({ lang, dict }: NewSignalFormProps) {
     e.preventDefault();
 
     if (!validate()) {
-      errorSummaryRef.current?.focus();
+      setFailedSubmit((count) => count + 1);
       return;
     }
 

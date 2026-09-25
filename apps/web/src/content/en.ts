@@ -15,6 +15,7 @@ export const en: Dictionary = {
     reducedDecorToggle: 'Toggle reduced decoration',
     errorSummary: 'Form error summary',
     statusRadioGroup: 'Change signal status',
+    pagination: 'Pagination',
   },
   nav: {
     library: 'Library',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { locales, isValidLocale } from '@/lib/i18n';
+import { HtmlLang } from '@/components/layout/HtmlLang';
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -21,6 +22,7 @@ export default async function LangLayout({
 
   return (
     <div className="min-h-screen flex flex-col bg-paper text-ink selection:bg-sticky-yellow selection:text-ink">
+      <HtmlLang lang={lang} />
       {children}
     </div>
   );

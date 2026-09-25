@@ -13,6 +13,7 @@ export interface Dictionary {
     reducedDecorToggle: string;
     errorSummary: string;
     statusRadioGroup: string;
+    pagination: string;
   };
   nav: {
     library: string;

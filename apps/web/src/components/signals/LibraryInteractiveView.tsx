@@ -50,6 +50,7 @@ interface LibraryInteractiveViewProps {
       total: string;
       statusAll: string;
     };
+    paginationLabel: string;
   };
 }
 
@@ -398,6 +399,7 @@ export function LibraryInteractiveView({
                   page: dict.common.page,
                   of: dict.common.of,
                   total: dict.common.total,
+                  label: dict.paginationLabel,
                 }}
                 createPageUrl={(p) => {
                   const sp = new URLSearchParams();

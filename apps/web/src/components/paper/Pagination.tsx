@@ -10,6 +10,7 @@ interface PaginationProps {
     page: string;
     of: string;
     total: string;
+    label: string;
   };
   createPageUrl: (pageNumber: number) => string;
 }
@@ -36,7 +37,7 @@ export function Pagination({
 
   return (
     <nav
-      aria-label="Pagination"
+      aria-label={dict.label}
       className="flex items-center justify-between py-4 border-t border-rule flex-wrap gap-3"
     >
       <div className="font-mono text-xs text-ink-muted whitespace-nowrap">

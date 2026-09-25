@@ -15,6 +15,7 @@ export const uz: Dictionary = {
     reducedDecorToggle: 'Bezaklarni kamaytirish rejimi',
     errorSummary: 'Formadagi xatoliklar roʻyxati',
     statusRadioGroup: 'Qayd holatini oʻzgartirish',
+    pagination: 'Sahifalar',
   },
   nav: {
     library: 'Kutubxona',

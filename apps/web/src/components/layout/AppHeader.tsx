@@ -18,6 +18,7 @@ interface AppHeaderProps {
     searchShortcutHint: string;
     langSelector: string;
     userProfile: string;
+    mainNavigation: string;
     signOut: string;
     nav: {
       library: string;
@@ -122,7 +123,7 @@ export function AppHeader({ lang, dict }: AppHeaderProps) {
       {/* Second row: Navigation tabs styled like Paper Folder Tabs */}
       <div className="border-t border-rule/70 bg-desk/80">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <nav aria-label="App Navigation" className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pt-1">
+          <nav aria-label={dict.mainNavigation} className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pt-1">
             {navItems.map((item) => {
               const isActive =
                 pathname === item.href ||
