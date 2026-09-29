@@ -28,6 +28,6 @@ npm run build
 ```
 
 ## Structure
-- `apps/web`: Next.js frontend application (App Router, Tailwind css, TypeScript).
+- `apps/web`: Next.js frontend application (App Router, Tailwind CSS, TypeScript).
 - `scripts/`: Contrast and validation utilities.
 - `design/`: Design references and system specifications.
